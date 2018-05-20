@@ -1,4 +1,4 @@
-package org.vaadin.mikotin.events;
+package org.mikotin.googlesignin.events;
 
 public class UserLoginEvent {
     private String userId;
@@ -8,9 +8,10 @@ public class UserLoginEvent {
     private String locale;
     private String firstName;
     private String lastName;
+    private String token;
 
     public UserLoginEvent(String userId, String email, String name, String pictureUrl, String locale, String firstName,
-            String lastName) {
+            String lastName, String token) {
         this.userId = userId;
         this.email = email;
         this.name = name;
@@ -18,6 +19,7 @@ public class UserLoginEvent {
         this.locale = locale;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.token = token;
     }
 
     public String getUserId() {
@@ -48,4 +50,12 @@ public class UserLoginEvent {
         return lastName;
     }
 
+    /**
+     * Thhe login-token, retrieved from succesful login
+     *
+     * @return
+     */
+    public String getToken() {
+        return token;
+    }
 }

@@ -1,4 +1,4 @@
-# signin-component
+# Google Sign in - component
 
 Vaadin 10 Java integration of https://github.com/GoogleWebComponents/google-signin
 

@@ -1,6 +1,6 @@
-package org.vaadin.mikotin;
+package org.mikotin.googlesignin;
 
-import org.vaadin.mikotin.events.UserLoginEvent;
+import org.mikotin.googlesignin.events.UserLoginEvent;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Image;

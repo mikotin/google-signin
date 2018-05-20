@@ -1,6 +1,6 @@
-package org.vaadin.mikotin.events.internal;
+package org.mikotin.googlesignin.events.internal;
 
-import org.vaadin.mikotin.GoogleSignin;
+import org.mikotin.googlesignin.GoogleSignin;
 
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.DomEvent;

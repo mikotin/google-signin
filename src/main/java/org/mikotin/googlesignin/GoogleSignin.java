@@ -1,5 +1,6 @@
-package org.vaadin.mikotin;
+package org.mikotin.googlesignin;
 
+import javax.management.Notification;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -11,9 +12,9 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import org.vaadin.mikotin.events.UserLoginEvent;
-import org.vaadin.mikotin.events.internal.InternalSignInEvent;
-import org.vaadin.mikotin.events.internal.InternalSignOutEvent;
+import org.mikotin.googlesignin.events.internal.InternalSignInEvent;
+import org.mikotin.googlesignin.events.UserLoginEvent;
+import org.mikotin.googlesignin.events.internal.InternalSignOutEvent;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
@@ -141,7 +142,8 @@ public class GoogleSignin extends Component {
                 String givenName = (String) payload.get("given_name");
 
                 UserLoginEvent userEvent = new UserLoginEvent(userId, email,
-                        name, pictureUrl, locale, givenName, familyName);
+                        name, pictureUrl, locale, givenName, familyName,
+                        event.getIdToken());
                 fireEvent(userEvent);
                 if (autoLogout) {
                     logout();
