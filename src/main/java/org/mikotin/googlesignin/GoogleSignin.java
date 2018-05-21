@@ -1,6 +1,5 @@
 package org.mikotin.googlesignin;
 
-import javax.management.Notification;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -12,8 +11,8 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import org.mikotin.googlesignin.events.internal.InternalSignInEvent;
 import org.mikotin.googlesignin.events.UserLoginEvent;
+import org.mikotin.googlesignin.events.internal.InternalSignInEvent;
 import org.mikotin.googlesignin.events.internal.InternalSignOutEvent;
 
 import com.vaadin.flow.component.Component;
@@ -26,6 +25,20 @@ import com.vaadin.flow.shared.Registration;
  * to actually get the user-data
  *
  * https://www.webcomponents.org/element/GoogleWebComponents/google-signin
+ *
+ * Basic usage:
+ *
+ * GoogleSignin signin = new GoogleSignin("your-google-client-id");
+ * signin.addLoginListener(event -> {
+ *    Notification.show("Welcome, " + event.getFirstName());
+ * });
+ *
+ * NOTE that, by default signin has auto-logout feature on, this mean
+ * that google-session is logged out instantly after successful login
+ * (well, first the session is used to get basic user information,
+ * but after that). This is to protect user browser from auto-log in
+ * via sign in button. But in some case you might want to turn of auto-logout
+ *
  */
 @Tag("google-signin")
 @HtmlImport("bower_components/google-signin/google-signin.html")

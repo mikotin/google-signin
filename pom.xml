@@ -5,7 +5,7 @@
 
     <groupId>org.mikotin</groupId>
     <artifactId>google-signin</artifactId>
-    <version>0.9.3</version>
+    <version>1.0.0</version>
     <name>Google Sign in component</name>
     <description>Integration of google-signin for Vaadin 10</description>
 
