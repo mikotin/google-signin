@@ -19,6 +19,7 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.shared.Registration;
+import com.vaadin.flow.shared.ui.LoadMode;
 
 /**
  * A wrapper for google sign -web component, with some extra callbacks
@@ -41,7 +42,8 @@ import com.vaadin.flow.shared.Registration;
  *
  */
 @Tag("google-signin")
-@HtmlImport("bower_components/google-signin/google-signin.html")
+@HtmlImport(value = "bower_components/google-signin/google-signin.html",
+        loadMode = LoadMode.LAZY)
 public class GoogleSignin extends Component {
     private final GoogleIdTokenVerifier tokenVerifier;
     private String clientId;
