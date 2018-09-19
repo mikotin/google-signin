@@ -1,3 +1,6 @@
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/google-sign-in-component)
+[![Stars on Vaadin Directory](https://img.shields.io/vaadin-directory/star/google-sign-in-component.svg)](https://vaadin.com/directory/component/google-sign-in-component)
+
 # Google Sign in - component
 
 Vaadin 10 Java integration of https://github.com/GoogleWebComponents/google-signin
