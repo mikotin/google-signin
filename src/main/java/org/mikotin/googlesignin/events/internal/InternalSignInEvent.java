@@ -11,7 +11,8 @@ import com.vaadin.flow.component.EventData;
  */
 @DomEvent("google-signin-aware-success")
 public class InternalSignInEvent extends ComponentEvent<GoogleSignin> {
-    private String idToken;
+	private static final long serialVersionUID = 7076997587238977553L;
+	private String idToken;
 
     public InternalSignInEvent(GoogleSignin source, boolean fromClient,
             @EventData("event.detail.id_token") String idToken) {

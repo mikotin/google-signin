@@ -7,7 +7,9 @@ import com.vaadin.flow.component.DomEvent;
 
 @DomEvent("google-signout-attempted")
 public class InternalSignOutEvent extends ComponentEvent<GoogleSignin> {
-    public InternalSignOutEvent(GoogleSignin source, boolean fromClient) {
+	private static final long serialVersionUID = 582900770044067825L;
+
+	public InternalSignOutEvent(GoogleSignin source, boolean fromClient) {
         super(source, fromClient);
     }
 }

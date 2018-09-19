@@ -1,7 +1,10 @@
 package org.mikotin.googlesignin.events;
 
-public class UserLoginEvent {
-    private String userId;
+import java.io.Serializable;
+
+public class UserLoginEvent implements Serializable{
+	private static final long serialVersionUID = -9016840461179575979L;
+	private String userId;
     private String email;
     private String name;
     private String pictureUrl;
