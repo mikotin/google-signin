@@ -5,19 +5,20 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
+
+import org.mikotin.googlesignin.events.UserLoginEvent;
+import org.mikotin.googlesignin.events.internal.InternalSignInEvent;
+import org.mikotin.googlesignin.events.internal.InternalSignOutEvent;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import org.mikotin.googlesignin.events.UserLoginEvent;
-import org.mikotin.googlesignin.events.internal.InternalSignInEvent;
-import org.mikotin.googlesignin.events.internal.InternalSignOutEvent;
-
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
+import com.vaadin.flow.function.SerializableConsumer;
+import com.vaadin.flow.function.SerializableRunnable;
 import com.vaadin.flow.shared.Registration;
 import com.vaadin.flow.shared.ui.LoadMode;
 
@@ -45,16 +46,16 @@ import com.vaadin.flow.shared.ui.LoadMode;
 @HtmlImport(value = "bower_components/google-signin/google-signin.html",
         loadMode = LoadMode.LAZY)
 public class GoogleSignin extends Component {
-    private final GoogleIdTokenVerifier tokenVerifier;
-    private String clientId;
+	private static final long serialVersionUID = -5114750933070203286L;
+	private String clientId;
     private Brand brand;
     private Width width;
     private Height height;
     private Theme theme;
     private boolean autoLogout = true;
 
-    private List<Consumer<UserLoginEvent>> loginListeners;
-    private List<Runnable> logoutListeners;
+    private List<SerializableConsumer<UserLoginEvent>> loginListeners;
+    private List<SerializableRunnable> logoutListeners;
 
 
     public enum Brand {
@@ -121,10 +122,6 @@ public class GoogleSignin extends Component {
     public GoogleSignin(String clientId) {
         // set id and init tokenverifier
         this.clientId = clientId;
-        this.tokenVerifier = new GoogleIdTokenVerifier.Builder(
-                new NetHttpTransport(), JacksonFactory.getDefaultInstance())
-                .setAudience(Collections.singleton(clientId))
-                .build();
         // init listeners
         this.loginListeners = new ArrayList<>();
         this.logoutListeners = new ArrayList<>();
@@ -141,6 +138,11 @@ public class GoogleSignin extends Component {
 
     private void handleLogin(InternalSignInEvent event) {
         try {
+        	GoogleIdTokenVerifier tokenVerifier = new GoogleIdTokenVerifier.Builder(
+                    new NetHttpTransport(), JacksonFactory.getDefaultInstance())
+                    .setAudience(Collections.singleton(clientId))
+                    .build();
+        	
             GoogleIdToken idToken = tokenVerifier.verify(event.getIdToken());
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
@@ -188,7 +190,7 @@ public class GoogleSignin extends Component {
      * @param consumer that consumes the {@link UserLoginEvent} which has all user info
      * @return hook for removing the listener
      */
-    public Registration addLoginListener(Consumer<UserLoginEvent> consumer) {
+    public Registration addLoginListener(SerializableConsumer<UserLoginEvent> consumer) {
         loginListeners.add(consumer);
         return () -> loginListeners.remove(consumer);
     }
@@ -201,7 +203,7 @@ public class GoogleSignin extends Component {
      * @param action Action to perform if logout is triggered
      * @return hook for removing the listener
      */
-    public Registration addLogoutListener(Runnable action) {
+    public Registration addLogoutListener(SerializableRunnable action) {
         logoutListeners.add(action);
         return () -> logoutListeners.remove(action);
     }
