@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.jackson2.JacksonFactory;
 import org.mikotin.googlesignin.events.UserLoginEvent;
 import org.mikotin.googlesignin.events.internal.InternalSignInEvent;
 import org.mikotin.googlesignin.events.internal.InternalSignOutEvent;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.HtmlImport;
@@ -150,6 +150,7 @@ public class GoogleSignin extends Component {
 
                 // Get profile information from payload
                 String email = payload.getEmail();
+                Boolean emailVerified = payload.getEmailVerified();
                 String name = (String) payload.get("name");
                 String pictureUrl = (String) payload.get("picture");
                 String locale = (String) payload.get("locale");
@@ -157,7 +158,7 @@ public class GoogleSignin extends Component {
                 String givenName = (String) payload.get("given_name");
 
                 UserLoginEvent userEvent = new UserLoginEvent(userId, email,
-                        name, pictureUrl, locale, givenName, familyName,
+                      emailVerified,name, pictureUrl, locale, givenName, familyName,
                         event.getIdToken());
                 fireEvent(userEvent);
                 if (autoLogout) {

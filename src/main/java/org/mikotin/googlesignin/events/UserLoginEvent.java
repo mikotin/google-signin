@@ -4,16 +4,18 @@ public class UserLoginEvent {
     private String userId;
     private String email;
     private String name;
+    private Boolean emailVerified;
     private String pictureUrl;
     private String locale;
     private String firstName;
     private String lastName;
     private String token;
 
-    public UserLoginEvent(String userId, String email, String name, String pictureUrl, String locale, String firstName,
+    public UserLoginEvent(String userId, String email, Boolean emailVerified, String name, String pictureUrl, String locale, String firstName,
             String lastName, String token) {
         this.userId = userId;
         this.email = email;
+        this.emailVerified = emailVerified;
         this.name = name;
         this.pictureUrl = pictureUrl;
         this.locale = locale;
@@ -30,7 +32,11 @@ public class UserLoginEvent {
         return email;
     }
 
-    public String getName() {
+    public Boolean getEmailVerified() {
+      return emailVerified;
+   }
+
+   public String getName() {
         return name;
     }
 
